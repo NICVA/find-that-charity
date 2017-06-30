@@ -36,6 +36,10 @@ def search_query(name, domain_name=None):
                     },
                     "functions": [
                         {
+                            "filter": {"exists": {"field": "ccni_number"}},
+                            "weight": 2
+                        },
+                        {
                             "filter": {"match_phrase_prefix": {"known_as": "{{name}}"}},
                             "weight": 200
                         }, {
