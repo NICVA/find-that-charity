@@ -30,9 +30,5 @@ inline:
                 - alt_names
                 operator: and
             weight: 10
-          - filter:
-              term:
-                active: false
-            weight: 0.9
 params:
   name: term
