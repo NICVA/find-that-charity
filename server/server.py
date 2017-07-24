@@ -8,6 +8,7 @@ from collections import OrderedDict
 
 app = bottle.default_app()
 
+
 def search_query(term):
     with open ('./es_config.yml', 'rb') as yaml_file:
         json_q = yaml.load(yaml_file)
@@ -59,8 +60,8 @@ def service_spec():
             },
             "preview": {
                 "url": service_url + "preview/charity/{{id}}",
-                "width": 430,
-                "height": 300
+                "width": 500,
+                "height": 450
             },
             "defaultTypes": [{
                 "id": "/" + app.config["es_type"],
@@ -73,7 +74,7 @@ def search_return(query):
     res = res["hits"]
     for result in res["hits"]:
         result["_link"] = "/charity/" + result["_id"]
-    return bottle.template('index', res=res)
+    return bottle.template('index', res=res, term=json.loads(query)["params"]["name"])
 
 @app.route('/')
 def home():
